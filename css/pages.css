@@ -391,6 +391,7 @@ main { padding-top: var(--nav-height); }
 }
 
 .pricing-grid {
+  padding-top: 20px;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 20px;
@@ -858,6 +859,7 @@ main { padding-top: var(--nav-height); }
     padding: 0 20px 20px;
   }
   .pricing-grid {
+  padding-top: 20px;
     grid-template-columns: repeat(4, min(260px, 78vw));
     min-width: max-content;
     gap: 16px;
