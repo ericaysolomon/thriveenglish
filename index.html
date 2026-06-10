@@ -168,7 +168,7 @@
                 <span class="phoneme-word">fan</span>
                 <span class="phoneme-word">stamp</span>
               </div>
-              <button class="phoneme-audio-btn">&#128266; Hear the Sound</button>
+              <button class="phoneme-audio-btn" onclick="playPhoneme()">&#128266; Hear the Sound</button>
               <div class="phoneme-patterns">
                 <span class="phoneme-patterns-label">Spelling Patterns</span>
                 <div class="pattern-row">
@@ -318,5 +318,11 @@
   </footer>
 
   <script src="js/main.js"></script>
+<script>
+function playPhoneme() {
+  var audio = new Audio("audio/vowel_short_a.mp3");
+  audio.play();
+}
+</script>
 </body>
 </html>
