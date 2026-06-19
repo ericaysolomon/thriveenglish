@@ -452,7 +452,7 @@ main { padding-top: var(--nav-height); }
   font-size: 14px;
   color: #444;
   padding: 8px 0;
-  border-bottom: 1px solid var(--border);
+  border-bottom: 3px solid var(--gold);
   display: flex;
   align-items: flex-start;
   gap: 8px;
@@ -615,7 +615,7 @@ main { padding-top: var(--nav-height); }
   display: grid;
   grid-template-columns: 280px 1fr;
   gap: 64px;
-  align-items: start;
+  align-items: center;
   margin-bottom: 52px;
 }
 
@@ -627,7 +627,7 @@ main { padding-top: var(--nav-height); }
   line-height: 1.55;
   padding: 24px 0;
   border-top: 3px solid var(--gold);
-  border-bottom: 1px solid var(--border);
+  border-bottom: 3px solid var(--gold);
   margin-bottom: 0;
 }
 
@@ -679,7 +679,7 @@ main { padding-top: var(--nav-height); }
   font-size: 15px;
   color: #333;
   padding: 11px 0;
-  border-bottom: 1px solid var(--border);
+  border-bottom: 3px solid var(--gold);
   line-height: 1.5;
 }
 .qual-list li::before {
