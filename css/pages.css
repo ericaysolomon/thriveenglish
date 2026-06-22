@@ -819,7 +819,7 @@ main { padding-top: var(--nav-height); }
    RESPONSIVE OVERRIDES
    ═══════════════════════════════════ */
 
-@media (max-width: 900px) {
+@media (max-width: 767px) {
   .coaching-pricing-grid { grid-template-columns: 1fr; }
 }
 @media (max-width: 1199px) {
