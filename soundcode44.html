@@ -58,7 +58,7 @@
         </p>
         <div class="hero-btns fade-in fade-in-delay-3">
           <a href="https://soundcode44.thriveenglish.co" class="btn btn-primary btn-lg">Try Free &mdash; No Account Needed</a>
-          <a href="https://thriveenglish.gumroad.com/l/ynxtkb?wanted=true&offer_code=FOUNDING" class="btn btn-outline-white btn-lg">Get Full Access from $9.99/month</a>
+          <a href="#" onclick="getPaymentLink('https://thriveenglish.gumroad.com/l/ynxtkb?wanted=true&offer_code=FOUNDING');return false;" class="btn btn-outline-white btn-lg">Get Full Access from $9.99/month</a>
         </div>
       </div>
     </section>
@@ -158,7 +158,7 @@
                 <li>Mouth position guides</li>
                 <li>Offline access</li>
               </ul>
-              <a href="https://thriveenglish.gumroad.com/l/ynxtkb?wanted=true&offer_code=FOUNDING" class="btn btn-primary btn-full">Get Monthly</a>
+              <a href="#" onclick="getPaymentLink('https://thriveenglish.gumroad.com/l/ynxtkb?wanted=true&offer_code=FOUNDING');return false;" class="btn btn-primary btn-full">Get Monthly</a>
             </div>
 
             <!-- Annual - Best Value -->
@@ -175,7 +175,7 @@
                 <li>Mouth position guides</li>
                 <li>Offline access</li>
               </ul>
-              <a href="https://thriveenglish.gumroad.com/l/ynxtkb?wanted=true&offer_code=FOUNDING" class="btn btn-primary btn-full">Get Annual &mdash; Save 33%</a>
+              <a href="#" onclick="getPaymentLink('https://thriveenglish.gumroad.com/l/ynxtkb?wanted=true&offer_code=FOUNDING');return false;" class="btn btn-primary btn-full">Get Annual &mdash; Save 33%</a>
               <p class="pricing-note">Save over $19 vs. monthly</p>
             </div>
 
@@ -328,5 +328,24 @@
   </footer>
 
   <script src="js/main.js"></script>
+
+<script>
+async function getPaymentLink(gumroadUrl) {
+  try {
+    const res = await fetch('https://ipapi.co/json/');
+    const data = await res.json();
+    const africanCountries = ['NG','GH','KE','ZA','EG','ET','TZ','UG','CM','CI','SN','ZM','ZW','RW','MZ','AO','MG','BJ','BF','ML','NE','TD','SO','SS','ER','DJ','CF','CG','CD','GA','GQ','ST','CV','KM','MU','SC','LY','TN','DZ','MA','SD','MR','GM','GW','SL','LR','GN','TG','BJ','LS','SZ','BW','NA','MW'];
+    if (africanCountries.includes(data.country_code)) {
+      const lifetimeGumroad = 'https://thriveenglish.gumroad.com/l/ilcnt?wanted=true&offer_code=FOUNDING';
+    const selfanyUrl = gumroadUrl === lifetimeGumroad ? 'https://selfany.com/SoundCode44Lifetime' : 'https://selfany.com/SoundCode44';
+    window.open(selfanyUrl, '_blank');
+    } else {
+      window.open(gumroadUrl, '_blank');
+    }
+  } catch(e) {
+    window.open(gumroadUrl, '_blank');
+  }
+}
+</script>
 </body>
 </html>
