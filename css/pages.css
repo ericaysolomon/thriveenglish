@@ -587,11 +587,15 @@ main { padding-top: var(--nav-height); }
 
 /* Coaching pricing */
 .coaching-pricing-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
   align-items: stretch;
   width: 100%;
+}
+.coaching-pricing-grid > .pricing-card {
+  flex: 1 1 0;
+  min-width: 0;
 }
 
 /* ═══════════════════════════════════
