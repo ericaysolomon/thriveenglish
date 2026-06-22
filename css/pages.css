@@ -590,6 +590,7 @@ main { padding-top: var(--nav-height); }
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 24px;
+  align-items: start;
 }
 
 /* ═══════════════════════════════════
@@ -818,6 +819,9 @@ main { padding-top: var(--nav-height); }
    RESPONSIVE OVERRIDES
    ═══════════════════════════════════ */
 
+@media (max-width: 900px) {
+  .coaching-pricing-grid { grid-template-columns: 1fr; }
+}
 @media (max-width: 1199px) {
   .sc-feature-grid       { grid-template-columns: 1fr; gap: 48px; }
   .pricing-grid          { grid-template-columns: repeat(2, 1fr); }
