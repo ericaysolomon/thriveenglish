@@ -843,7 +843,6 @@ main { padding-top: var(--nav-height); }
   .about-preview-grid   { grid-template-columns: 1fr; gap: 28px; }
   .about-main-grid      { grid-template-columns: 1fr; gap: 28px; }
   .coach-cred-grid      { grid-template-columns: 1fr; gap: 28px; }
-  .coaching-pricing-grid{ grid-template-columns: 1fr; }
   .creds-grid           { grid-template-columns: 1fr; gap: 36px; }
   .about-stats          { grid-template-columns: 1fr 1fr; }
   .contact-cards        { grid-template-columns: 1fr; }
