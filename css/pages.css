@@ -588,8 +588,8 @@ main { padding-top: var(--nav-height); }
 /* Coaching pricing */
 .coaching-pricing-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 16px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
   align-items: stretch;
   width: 100%;
 }
