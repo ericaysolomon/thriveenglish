@@ -592,6 +592,7 @@ main { padding-top: var(--nav-height); }
   gap: 20px;
   align-items: stretch;
   width: 100%;
+  padding-top: 20px;
 }
 .coaching-pricing-grid > .pricing-card {
   flex: 1 1 0;
