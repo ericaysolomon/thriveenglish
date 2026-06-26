@@ -58,7 +58,7 @@
         </p>
         <div class="hero-btns fade-in fade-in-delay-3">
           <a href="https://soundcode44.thriveenglish.co" class="btn btn-primary btn-lg">Try Free &mdash; No Account Needed</a>
-          <a href="#" onclick="getPaymentLink('https://thriveenglish.gumroad.com/l/ynxtkb?wanted=true&offer_code=FOUNDING');return false;" class="btn btn-outline-white btn-lg">Get Full Access from $9.99/month</a>
+          <a href="#" onclick="getPaymentLink('https://thriveenglish.gumroad.com/l/ynxtkb?wanted=true&offer_code=FOUNDING');return false;" id="btn-hero-access" class="btn btn-outline-white btn-lg">Get Full Access from $9.99/month</a>
         </div>
       </div>
     </section>
@@ -146,7 +146,7 @@
             </div>
 
             <!-- Monthly -->
-            <div class="card pricing-card fade-in fade-in-delay-1">
+            <div id="pricing-monthly-card" class="card pricing-card fade-in fade-in-delay-1">
               <p class="pricing-name">Monthly</p>
               <p class="pricing-price">$9.99</p>
               <p class="pricing-period">per month, cancel any time</p>
@@ -165,8 +165,8 @@
             <div class="card pricing-card featured-gold fade-in fade-in-delay-2" style="padding-top: 40px;">
               <span class="pricing-badge">&#11088; Best Value</span>
               <p class="pricing-name">Annual</p>
-              <p class="pricing-price">$79.99</p>
-              <p class="pricing-period">per year (~$3.33/month)</p>
+              <p id="price-annual" class="pricing-price">$79.99</p>
+              <p id="period-annual" class="pricing-period">per year (~$3.33/month)</p>
               <ul class="pricing-features">
                 <li>All 44 phonemes</li>
                 <li>Full IPA chart</li>
@@ -175,15 +175,15 @@
                 <li>Mouth position guides</li>
                 <li>Offline access</li>
               </ul>
-              <a href="#" onclick="getPaymentLink('https://thriveenglish.gumroad.com/l/ynxtkb?wanted=true&offer_code=FOUNDING');return false;" class="btn btn-primary btn-full">Get Annual &mdash; Save 33%</a>
-              <p class="pricing-note">Save over $19 vs. monthly</p>
+              <a href="#" onclick="getPaymentLink('https://thriveenglish.gumroad.com/l/ynxtkb?wanted=true&offer_code=FOUNDING');return false;" id="btn-annual" class="btn btn-primary btn-full">Get Annual &mdash; Save 33%</a>
+              <p id="note-annual" class="pricing-note">Save over $19 vs. monthly</p>
             </div>
 
             <!-- Lifetime -->
             <div class="card pricing-card featured-teal fade-in fade-in-delay-3" style="padding-top: 40px;">
               <span class="pricing-badge teal">&#128293; Limited Offer</span>
               <p class="pricing-name">Lifetime</p>
-              <p class="pricing-price">$199.99</p>
+              <p id="price-lifetime" class="pricing-price">$199.99</p>
               <p class="pricing-period">one-time payment</p>
               <ul class="pricing-features">
                 <li>All 44 phonemes</li>
@@ -193,7 +193,7 @@
                 <li>Mouth position guides</li>
                 <li>All future updates &mdash; free</li>
               </ul>
-              <a href="https://thriveenglish.gumroad.com/l/ilcnt?wanted=true&offer_code=FOUNDING" class="btn btn-primary btn-full" style="background: var(--teal); border-color: var(--teal);">Get Lifetime Access</a>
+              <a href="#" onclick="getPaymentLink('https://thriveenglish.gumroad.com/l/ilcnt?wanted=true&offer_code=FOUNDING');return false;" id="btn-lifetime" class="btn btn-primary btn-full" style="background: var(--teal); border-color: var(--teal);">Get Lifetime Access</a>
               <p class="pricing-note">Never pay again</p>
             </div>
 
@@ -202,7 +202,7 @@
       </div>
     </section>
 
-    <p style="text-align: center; font-size: 0.85rem; color: #888; margin-top: 24px; margin-bottom: 0;">Prices shown in USD. Local taxes may apply at checkout.</p>
+    <p class="pricing-usd-note" style="text-align: center; font-size: 0.85rem; color: #888; margin-top: 24px; margin-bottom: 0;">Prices shown in USD. Local taxes may apply at checkout.</p>
     <!-- FAQ -->
     <section class="section bg-light">
       <div class="container">
@@ -330,7 +330,45 @@
   <script src="js/main.js"></script>
 
 <script>
-async function getPaymentLink(gumroadUrl) {
+
+  // Geo-targeted pricing display
+  async function initPricing() {
+    try {
+      const res = await fetch('https://ipapi.co/json/');
+      const data = await res.json();
+      const africanCountries = ['NG','GH','KE','ZA','EG','ET','TZ','UG','CM','CI','SN','ZM','ZW','RW','MZ','AO','MG','BJ','BF','ML','NE','TD','SO','SS','ER','DJ','CF','CG','CD','GA','GQ','ST','CV','KM','MU','SC','LY','TN','DZ','MA','SD','MR','GM','GW','SL','LR','GN','TG','LS','SZ','BW','NA','MW'];
+      if (africanCountries.includes(data.country_code)) {
+        // Hide monthly - not available in Africa
+        const mc = document.getElementById('pricing-monthly-card');
+        if (mc) mc.style.display = 'none';
+        // Annual pricing
+        const pa = document.getElementById('price-annual');
+        if (pa) pa.textContent = '$19.99';
+        const pera = document.getElementById('period-annual');
+        if (pera) pera.textContent = 'per year';
+        const ba = document.getElementById('btn-annual');
+        if (ba) ba.textContent = 'Get Annual Access';
+        const na = document.getElementById('note-annual');
+        if (na) na.textContent = 'Africa pricing — best value';
+        // Lifetime pricing
+        const pl = document.getElementById('price-lifetime');
+        if (pl) pl.textContent = '$49.99';
+        const bl = document.getElementById('btn-lifetime');
+        if (bl) bl.textContent = 'Get Lifetime Access';
+        // Hero button
+        const bh = document.getElementById('btn-hero-access');
+        if (bh) bh.textContent = 'Get Full Access from $19.99/year';
+        // USD note
+        const un = document.querySelector('.pricing-usd-note');
+        if (un) un.textContent = 'Africa pricing shown. Secure checkout via Selfany.';
+      }
+    } catch(e) {
+      // Keep default global pricing on error
+    }
+  }
+  initPricing();
+
+  async function getPaymentLink(gumroadUrl) {
   try {
     const res = await fetch('https://ipapi.co/json/');
     const data = await res.json();
