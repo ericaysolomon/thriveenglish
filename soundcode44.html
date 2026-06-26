@@ -127,7 +127,7 @@
           <p style="color: #666; font-size: 16px; max-width: 500px; margin: 0 auto;">Start free &mdash; no account needed. Upgrade any time for full access.</p>
         </div>
         <div class="pricing-scroll-wrapper">
-          <div class="pricing-grid">
+          <div id="pricing-grid" class="pricing-grid">
 
             <!-- Free -->
             <div class="card pricing-card fade-in">
@@ -345,6 +345,14 @@
         // Hide monthly - not available in Africa
         const mc = document.getElementById('pricing-monthly-card');
         if (mc) mc.style.display = 'none';
+        // Adjust grid to 3 columns centred
+        const pg = document.getElementById('pricing-grid');
+        if (pg) {
+          pg.style.gridTemplateColumns = 'repeat(3, minmax(0, 320px))';
+          pg.style.justifyContent = 'center';
+          pg.style.maxWidth = '1020px';
+          pg.style.margin = '0 auto';
+        }
         // Annual pricing
         const pa = document.getElementById('price-annual');
         if (pa) pa.textContent = '$19.99';
