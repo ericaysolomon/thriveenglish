@@ -56,7 +56,7 @@
           Whether you want to perfect your pronunciation, ace your IELTS, or communicate with confidence in a professional environment &mdash; Eric's personalised coaching sessions are designed to deliver real, measurable results.
         </p>
         <div class="hero-btns fade-in fade-in-delay-2">
-          <a href="#" onclick="bookCoaching('https://thriveenglish.gumroad.com/l/coaching-single','https://selfany.com/coachingsingle', event)" class="btn btn-primary btn-lg">Book Your First Session &rarr;</a>
+          <a href="#" onclick="showCoachingPicker(event)" class="btn btn-primary btn-lg">Book Your First Session &rarr;</a>
         </div>
       </div>
     </section>
@@ -69,22 +69,22 @@
           <h2>Choose Your Focus Area</h2>
         </div>
         <div class="grid-2">
-          <a href="#" onclick="bookCoaching('https://thriveenglish.gumroad.com/l/coaching-single','https://selfany.com/coachingsingle', event)" style="text-decoration:none;color:inherit;display:block;"><div class="card coaching-card fade-in" style="cursor:pointer;">
+          <a href="#" onclick="showCoachingPicker(event)" style="text-decoration:none;color:inherit;display:block;"><div class="card coaching-card fade-in" style="cursor:pointer;">
             <span class="coaching-card-icon">&#128483;</span>
             <h3>Pronunciation Coaching</h3>
             <p>Struggling with specific sounds or being misunderstood? Eric will diagnose exactly where your pronunciation breaks down and give you targeted, practical exercises to fix it. Perfect for anyone who wants to speak with natural British English clarity.</p>
           </div>
-          <a href="#" onclick="bookCoaching('https://thriveenglish.gumroad.com/l/coaching-single','https://selfany.com/coachingsingle', event)" style="text-decoration:none;color:inherit;display:block;"><div class="card coaching-card fade-in fade-in-delay-1" style="cursor:pointer;">
+          <a href="#" onclick="showCoachingPicker(event)" style="text-decoration:none;color:inherit;display:block;"><div class="card coaching-card fade-in fade-in-delay-1" style="cursor:pointer;">
             <span class="coaching-card-icon">&#128202;</span>
             <h3>IELTS Preparation</h3>
             <p>Preparing for the IELTS Speaking test? Eric will help you understand the scoring criteria, build examiner-ready vocabulary, and practise under realistic test conditions to maximise your band score. He has helped students reach band 8.0 and above.</p>
           </div>
-          <a href="#" onclick="bookCoaching('https://thriveenglish.gumroad.com/l/coaching-single','https://selfany.com/coachingsingle', event)" style="text-decoration:none;color:inherit;display:block;"><div class="card coaching-card fade-in fade-in-delay-2" style="cursor:pointer;">
+          <a href="#" onclick="showCoachingPicker(event)" style="text-decoration:none;color:inherit;display:block;"><div class="card coaching-card fade-in fade-in-delay-2" style="cursor:pointer;">
             <span class="coaching-card-icon">&#128188;</span>
             <h3>Business English</h3>
             <p>Communicating in a professional English-speaking environment? Eric will help you build the vocabulary, clarity, and confidence to excel in meetings, presentations, negotiations, and professional written communication.</p>
           </div>
-          <a href="#" onclick="bookCoaching('https://thriveenglish.gumroad.com/l/coaching-single','https://selfany.com/coachingsingle', event)" style="text-decoration:none;color:inherit;display:block;"><div class="card coaching-card fade-in fade-in-delay-3" style="cursor:pointer;">
+          <a href="#" onclick="showCoachingPicker(event)" style="text-decoration:none;color:inherit;display:block;"><div class="card coaching-card fade-in fade-in-delay-3" style="cursor:pointer;">
             <span class="coaching-card-icon">&#127775;</span>
             <h3>General English Fluency</h3>
             <p>Want to simply speak more naturally and confidently? Eric tailors every session to your current level and goals &mdash; whether you're an intermediate learner building fluency or a near-fluent speaker seeking the final layer of refinement.</p>
@@ -185,7 +185,7 @@
               <li>Session notes provided</li>
               <li>Practice materials included</li>
             </ul>
-            <a href="#" onclick="bookCoaching('https://thriveenglish.gumroad.com/l/coaching-single','https://selfany.com/coachingsingle', event)" class="btn btn-secondary btn-full">Book Single Session</a>
+            <a href="#" onclick="showCoachingPicker(event)" class="btn btn-secondary btn-full">Book Single Session</a>
           </div>
 
           <!-- Starter Pack -->
@@ -271,7 +271,7 @@
           </video>
         </div>
         <div class="hero-btns fade-in fade-in-delay-3">
-          <a href="#" onclick="bookCoaching('https://thriveenglish.gumroad.com/l/coaching-single','https://selfany.com/coachingsingle', event)" class="btn btn-primary btn-lg">Book Your First Session &rarr;</a>
+          <a href="#" onclick="showCoachingPicker(event)" class="btn btn-primary btn-lg">Book Your First Session &rarr;</a>
           <a href="soundcode44.html" class="btn btn-secondary btn-lg">Explore SoundCode 44</a>
         </div>
       </div>
@@ -321,6 +321,56 @@
   <script src="js/main.js"></script>
 
 <script>
+
+async function showCoachingPicker(event) {
+  if (event) event.preventDefault();
+  const existing = document.getElementById('coaching-picker-overlay');
+  if (existing) existing.remove();
+  const africanCountries = ['NG','GH','KE','ZA','EG','ET','TZ','UG','CM','CI','SN','ZM','ZW','RW','MZ','AO','MG','BJ','BF','ML','NE','TD','SO','SS','ER','DJ','CF','CG','CD','GA','GQ','ST','CV','KM','MU','SC','LY','TN','DZ','MA','SD','MR','GM','GW','SL','LR','GN','TG','LS','SZ','BW','NA','MW'];
+  let isAfrica = false;
+  try {
+    const res = await fetch('https://ipapi.co/json/');
+    const data = await res.json();
+    isAfrica = africanCountries.includes(data.country_code);
+  } catch(e) {}
+  const s = isAfrica ? {
+    single:'https://selfany.com/coachingsingle',
+    starter:'https://selfany.com/coachingstarter',
+    intensive:'https://selfany.com/coachingintensive'
+  } : {
+    single:'https://thriveenglish.gumroad.com/l/coaching-single',
+    starter:'https://thriveenglish.gumroad.com/l/coaching-starter',
+    intensive:'https://thriveenglish.gumroad.com/l/coaching-intensive'
+  };
+  const o = document.createElement('div');
+  o.id = 'coaching-picker-overlay';
+  o.style.cssText = 'position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(13,43,85,0.88);z-index:99999;display:flex;align-items:center;justify-content:center;padding:16px;overflow-y:auto;';
+  o.addEventListener('click', function(e){ if(e.target===o) o.remove(); });
+  o.innerHTML = '<div style="background:#fff;border-radius:18px;width:100%;max-width:560px;padding:32px 24px;text-align:center;">'
+    + '<div style="font-size:20px;font-weight:700;color:#0D2B55;margin-bottom:6px;">Choose Your Coaching Package</div>'
+    + '<div style="font-size:13px;color:#888;margin-bottom:24px;">All sessions are 60 minutes via Google Meet</div>'
+    + '<div style="display:flex;flex-wrap:wrap;gap:12px;margin-bottom:20px;justify-content:center;">'
+    + '<div style="flex:1;min-width:140px;border:2px solid #1A7A6E;border-radius:12px;padding:18px 12px;cursor:pointer;" onclick="window.open(''+s.single+'','_blank');document.getElementById('coaching-picker-overlay').remove();">'
+    + '<div style="font-size:11px;font-weight:700;color:#1A7A6E;letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;">Single Session</div>'
+    + '<div style="font-size:26px;font-weight:700;color:#0D2B55;margin-bottom:4px;">$35</div>'
+    + '<div style="font-size:12px;color:#888;margin-bottom:14px;">1 x 60-min session</div>'
+    + '<div style="background:#1A7A6E;color:#fff;border-radius:8px;padding:8px 12px;font-size:13px;font-weight:600;">Book Single</div></div>'
+    + '<div style="flex:1;min-width:140px;border:2px solid #C9973A;border-radius:12px;padding:18px 12px;cursor:pointer;position:relative;" onclick="window.open(''+s.starter+'','_blank');document.getElementById('coaching-picker-overlay').remove();">'
+    + '<div style="position:absolute;top:-10px;left:50%;transform:translateX(-50%);background:#C9973A;color:#0D2B55;font-size:10px;font-weight:700;padding:3px 10px;border-radius:20px;white-space:nowrap;">Most Popular</div>'
+    + '<div style="font-size:11px;font-weight:700;color:#C9973A;letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;">Starter Pack</div>'
+    + '<div style="font-size:26px;font-weight:700;color:#0D2B55;margin-bottom:4px;">$90</div>'
+    + '<div style="font-size:12px;color:#888;margin-bottom:14px;">3 x 60-min - save $15</div>'
+    + '<div style="background:#C9973A;color:#0D2B55;border-radius:8px;padding:8px 12px;font-size:13px;font-weight:600;">Book Starter</div></div>'
+    + '<div style="flex:1;min-width:140px;border:2px solid #0D2B55;border-radius:12px;padding:18px 12px;cursor:pointer;" onclick="window.open(''+s.intensive+'','_blank');document.getElementById('coaching-picker-overlay').remove();">'
+    + '<div style="font-size:11px;font-weight:700;color:#0D2B55;letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;">Intensive Pack</div>'
+    + '<div style="font-size:26px;font-weight:700;color:#0D2B55;margin-bottom:4px;">$160</div>'
+    + '<div style="font-size:12px;color:#888;margin-bottom:14px;">6 x 60-min - save $50</div>'
+    + '<div style="background:#0D2B55;color:#fff;border-radius:8px;padding:8px 12px;font-size:13px;font-weight:600;">Book Intensive</div></div>'
+    + '</div>'
+    + '<div style="font-size:12px;color:#aaa;cursor:pointer;" onclick="document.getElementById('coaching-picker-overlay').remove();">&#x2715; Close</div>'
+    + '</div>';
+  document.body.appendChild(o);
+}
 async function bookCoaching(gumroadUrl, selfanyUrl, event) {
   if (event) event.preventDefault();
   const africanCountries = ['NG','GH','KE','ZA','EG','ET','TZ','UG','CM','CI','SN','ZM','ZW','RW','MZ','AO','MG','BJ','BF','ML','NE','TD','SO','SS','ER','DJ','CF','CG','CD','GA','GQ','ST','CV','KM','MU','SC','LY','TN','DZ','MA','SD','MR','GM','GW','SL','LR','GN','TG','LS','SZ','BW','NA','MW'];
