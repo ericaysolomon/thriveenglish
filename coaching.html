@@ -369,6 +369,7 @@ async function showCoachingPicker(event) {
   inner.appendChild(closeBtn);
   o.appendChild(inner);
   document.body.appendChild(o);
+  history.pushState({coachingPicker:true},'');
 }
 async function bookCoaching(gumroadUrl, selfanyUrl, event) {
   if (event) event.preventDefault();
@@ -381,6 +382,12 @@ async function bookCoaching(gumroadUrl, selfanyUrl, event) {
     window.open(gumroadUrl, '_blank');
   }
 }
+</script>
+<script>
+window.addEventListener('popstate', function() {
+  const o = document.getElementById('coaching-picker-overlay');
+  if (o) o.remove();
+});
 </script>
 </body>
 </html>
