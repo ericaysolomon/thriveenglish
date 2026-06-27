@@ -234,6 +234,18 @@
     </div>
   </footer>
 
-  <script src="js/main.js"></script>
+  <script src="js/main.js">
+  async function bookCoaching(gumroadUrl, selfanyUrl, event) {
+    if (event) event.preventDefault();
+    const africanCountries = ['NG','GH','KE','ZA','EG','ET','TZ','UG','CM','CI','SN','ZM','ZW','RW','MZ','AO','MG','BJ','BF','ML','NE','TD','SO','SS','ER','DJ','CF','CG','CD','GA','GQ','ST','CV','KM','MU','SC','LY','TN','DZ','MA','SD','MR','GM','GW','SL','LR','GN','TG','LS','SZ','BW','NA','MW'];
+    try {
+      const res = await fetch('https://ipapi.co/json/');
+      const data = await res.json();
+      window.open(africanCountries.includes(data.country_code) ? selfanyUrl : gumroadUrl, '_blank');
+    } catch(e) {
+      window.open(gumroadUrl, '_blank');
+    }
+  }
+</script>
 </body>
 </html>
