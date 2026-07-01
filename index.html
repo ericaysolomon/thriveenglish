@@ -335,9 +335,9 @@ async function homeGetAccess(event) {
   if (event) event.preventDefault();
   const ac = ['NG','GH','KE','ZA','EG','ET','TZ','UG','CM','CI','SN','ZM','ZW','RW','MZ','AO','MG','BJ','BF','ML','NE','TD','SO','SS','ER','DJ','CF','CG','CD','GA','GQ','ST','CV','KM','MU','SC','LY','TN','DZ','MA','SD','MR','GM','GW','SL','LR','GN','TG','LS','SZ','BW','NA','MW'];
   try {
-    const res = await fetch('https://ipapi.co/json/');
+    const res = await fetch('https://api.country.is');
     const data = await res.json();
-    if (ac.includes(data.country_code)) { showHomePlanPicker(); return; }
+    if (ac.includes(data.country)) { showHomePlanPicker(); return; }
   } catch(e) {}
   window.open('https://thriveenglish.gumroad.com/l/ynxtkb?wanted=true&offer_code=FOUNDING','_blank');
 }
@@ -384,9 +384,9 @@ function showHomePlanPicker() {
   const ac = ['NG','GH','KE','ZA','EG','ET','TZ','UG','CM','CI','SN','ZM','ZW','RW','MZ','AO','MG','BJ','BF','ML','NE','TD','SO','SS','ER','DJ','CF','CG','CD','GA','GQ','ST','CV','KM','MU','SC','LY','TN','DZ','MA','SD','MR','GM','GW','SL','LR','GN','TG','LS','SZ','BW','NA','MW'];
   let isAfrica = false;
   try {
-    const res = await fetch('https://ipapi.co/json/');
+    const res = await fetch('https://api.country.is');
     const data = await res.json();
-    isAfrica = ac.includes(data.country_code);
+    isAfrica = ac.includes(data.country);
   } catch(e) {}
   const btn = document.getElementById('home-getaccess-btn');
   if (btn) btn.textContent = isAfrica ? 'Get Full Access from $19.99/year' : 'Get Full Access from $9.99/month';
