@@ -56,7 +56,7 @@
           Master British English pronunciation, ace your IELTS exam, communicate with confidence in business &mdash; with expert coaching and interactive tools built for real results.
         </p>
         <div class="hero-btns fade-in fade-in-delay-2">
-          <a href="soundcode44.thriveenglish.co" class="btn btn-primary btn-lg">Try Free Version</a>
+          <a href="https://soundcode44.thriveenglish.co" class="btn btn-primary btn-lg">Try Free Version</a>
           <a href="javascript:void(0)" id="home-getaccess-btn" onclick="homeGetAccess(event)" class="btn btn-outline-white btn-lg">Get Full Access from $9.99/month</a>
           <a href="coaching.html" class="btn btn-outline-white btn-lg">Book a Coaching Session</a>
         </div>
@@ -333,18 +333,40 @@ function playWord(word) {
 <script>
 async function homeGetAccess(event) {
   if (event) event.preventDefault();
-  const africanCountries = ['NG','GH','KE','ZA','EG','ET','TZ','UG','CM','CI','SN','ZM','ZW','RW','MZ','AO','MG','BJ','BF','ML','NE','TD','SO','SS','ER','DJ','CF','CG','CD','GA','GQ','ST','CV','KM','MU','SC','LY','TN','DZ','MA','SD','MR','GM','GW','SL','LR','GN','TG','LS','SZ','BW','NA','MW'];
+  const ac = ['NG','GH','KE','ZA','EG','ET','TZ','UG','CM','CI','SN','ZM','ZW','RW','MZ','AO','MG','BJ','BF','ML','NE','TD','SO','SS','ER','DJ','CF','CG','CD','GA','GQ','ST','CV','KM','MU','SC','LY','TN','DZ','MA','SD','MR','GM','GW','SL','LR','GN','TG','LS','SZ','BW','NA','MW'];
   try {
     const res = await fetch('https://ipapi.co/json/');
     const data = await res.json();
-    if (africanCountries.includes(data.country_code)) {
-      window.location.href = 'soundcode44.html#pricing';
-    } else {
-      window.location.href = 'soundcode44.html#pricing';
-    }
-  } catch(e) {
-    window.location.href = 'soundcode44.html#pricing';
-  }
+    if (ac.includes(data.country_code)) { showHomePlanPicker(); return; }
+  } catch(e) {}
+  window.open('https://thriveenglish.gumroad.com/l/ynxtkb?wanted=true&offer_code=FOUNDING','_blank');
+}
+function showHomePlanPicker() {
+  const ex = document.getElementById('home-plan-picker');
+  if (ex) ex.remove();
+  const o = document.createElement('div');
+  o.id = 'home-plan-picker';
+  o.style.cssText = 'position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(13,43,85,0.88);z-index:99999;display:flex;align-items:center;justify-content:center;padding:16px;';
+  o.addEventListener('click',function(e){if(e.target===o)o.remove();});
+  o.innerHTML = '<div style="background:#fff;border-radius:18px;width:100%;max-width:420px;padding:32px 24px;text-align:center;">'
+    +'<div style="font-size:20px;font-weight:700;color:#0D2B55;margin-bottom:6px;">Choose Your Plan</div>'
+    +'<div style="font-size:13px;color:#888;margin-bottom:24px;">Africa pricing via Selfany</div>'
+    +'<div style="display:flex;gap:14px;margin-bottom:20px;">'
+    +'<div style="flex:1;border:2px solid #1A7A6E;border-radius:12px;padding:18px 12px;cursor:pointer;" onclick="window.open('https://selfany.com/SoundCode44','_blank');document.getElementById('home-plan-picker').remove();">'
+    +'<div style="font-size:11px;font-weight:700;color:#1A7A6E;letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;">Annual</div>'
+    +'<div style="font-size:28px;font-weight:700;color:#0D2B55;margin-bottom:4px;">$19.99</div>'
+    +'<div style="font-size:12px;color:#888;margin-bottom:14px;">per year</div>'
+    +'<div style="background:#1A7A6E;color:#fff;border-radius:8px;padding:10px 16px;font-size:14px;font-weight:600;">Get Annual</div></div>'
+    +'<div style="flex:1;border:2px solid #C9973A;border-radius:12px;padding:18px 12px;cursor:pointer;" onclick="window.open('https://selfany.com/SoundCode44Lifetime','_blank');document.getElementById('home-plan-picker').remove();">'
+    +'<div style="font-size:11px;font-weight:700;color:#C9973A;letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;">Lifetime</div>'
+    +'<div style="font-size:28px;font-weight:700;color:#0D2B55;margin-bottom:4px;">$49.99</div>'
+    +'<div style="font-size:12px;color:#888;margin-bottom:14px;">one-time</div>'
+    +'<div style="background:#C9973A;color:#0D2B55;border-radius:8px;padding:10px 16px;font-size:14px;font-weight:600;">Get Lifetime</div></div>'
+    +'</div>'
+    +'<div style="font-size:12px;color:#aaa;cursor:pointer;" onclick="document.getElementById('home-plan-picker').remove();">&#x2715; Close</div>'
+    +'</div>';
+  document.body.appendChild(o);
+  history.pushState({homePlanPicker:true},'');
 }
 (async function() {
   const africanCountries = ['NG','GH','KE','ZA','EG','ET','TZ','UG','CM','CI','SN','ZM','ZW','RW','MZ','AO','MG','BJ','BF','ML','NE','TD','SO','SS','ER','DJ','CF','CG','CD','GA','GQ','ST','CV','KM','MU','SC','LY','TN','DZ','MA','SD','MR','GM','GW','SL','LR','GN','TG','LS','SZ','BW','NA','MW'];
@@ -353,7 +375,7 @@ async function homeGetAccess(event) {
     const data = await res.json();
     if (africanCountries.includes(data.country_code)) {
       const btn = document.getElementById('home-getaccess-btn');
-      if (btn) btn.textContent = 'Get Full Access from $19.99/year';
+      if (btn) btn.textContent = africanCountries.includes(data.country_code) ? 'Get Full Access from $19.99/year' : 'Get Full Access from $9.99/month';
       const note = document.getElementById('home-getaccess-note');
       if (note) note.textContent = 'Get Full Access from $19.99/year';
     }
