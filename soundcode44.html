@@ -429,8 +429,14 @@ function showAfricanPlanPicker() {
       <div style="font-size:12px;color:#aaa;cursor:pointer;" onclick="document.getElementById('plan-picker-overlay').remove();">&#x2715; Close</div>
     </div>`;
   document.body.appendChild(overlay);
+  history.pushState({planPicker:true},'');
 }
 
+
+window.addEventListener('popstate', function() {
+  const p = document.getElementById('plan-picker-overlay');
+  if (p) p.remove();
+});
 </script>
 </body>
 </html>
