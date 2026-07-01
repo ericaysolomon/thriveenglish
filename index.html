@@ -369,17 +369,17 @@ function showHomePlanPicker() {
   history.pushState({homePlanPicker:true},'');
 }
 (async function() {
-  const africanCountries = ['NG','GH','KE','ZA','EG','ET','TZ','UG','CM','CI','SN','ZM','ZW','RW','MZ','AO','MG','BJ','BF','ML','NE','TD','SO','SS','ER','DJ','CF','CG','CD','GA','GQ','ST','CV','KM','MU','SC','LY','TN','DZ','MA','SD','MR','GM','GW','SL','LR','GN','TG','LS','SZ','BW','NA','MW'];
+  const ac = ['NG','GH','KE','ZA','EG','ET','TZ','UG','CM','CI','SN','ZM','ZW','RW','MZ','AO','MG','BJ','BF','ML','NE','TD','SO','SS','ER','DJ','CF','CG','CD','GA','GQ','ST','CV','KM','MU','SC','LY','TN','DZ','MA','SD','MR','GM','GW','SL','LR','GN','TG','LS','SZ','BW','NA','MW'];
+  let isAfrica = false;
   try {
     const res = await fetch('https://ipapi.co/json/');
     const data = await res.json();
-    if (africanCountries.includes(data.country_code)) {
-      const btn = document.getElementById('home-getaccess-btn');
-      if (btn) btn.textContent = africanCountries.includes(data.country_code) ? 'Get Full Access from $19.99/year' : 'Get Full Access from $9.99/month';
-      const note = document.getElementById('home-getaccess-note');
-      if (note) note.textContent = 'Get Full Access from $19.99/year';
-    }
+    isAfrica = ac.includes(data.country_code);
   } catch(e) {}
+  const btn = document.getElementById('home-getaccess-btn');
+  if (btn) btn.textContent = isAfrica ? 'Get Full Access from $19.99/year' : 'Get Full Access from $9.99/month';
+  const note = document.getElementById('home-getaccess-note');
+  if (note) note.textContent = isAfrica ? 'Get Full Access from $19.99/year' : 'Get Full Access from $9.99/month';
 })();
 </script>
 </body>
