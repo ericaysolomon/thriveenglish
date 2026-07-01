@@ -394,5 +394,11 @@ function showHomePlanPicker() {
   if (note) note.textContent = isAfrica ? 'Get Full Access from $19.99/year' : 'Get Full Access from $9.99/month';
 })();
 </script>
+<script>
+window.addEventListener('popstate', function() {
+  const o = document.getElementById('home-plan-picker');
+  if (o) { o.remove(); history.pushState(null, ''); }
+});
+</script>
 </body>
 </html>
