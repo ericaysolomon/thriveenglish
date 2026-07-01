@@ -382,8 +382,9 @@
 
   async function getPaymentLink(gumroadUrl) {
   try {
-    const res = await fetch('https://ipapi.co/json/');
+    const res = await fetch('https://api.country.is');
     const data = await res.json();
+    data.country_code = data.country;
     const africanCountries = ['NG','GH','KE','ZA','EG','ET','TZ','UG','CM','CI','SN','ZM','ZW','RW','MZ','AO','MG','BJ','BF','ML','NE','TD','SO','SS','ER','DJ','CF','CG','CD','GA','GQ','ST','CV','KM','MU','SC','LY','TN','DZ','MA','SD','MR','GM','GW','SL','LR','GN','TG','BJ','LS','SZ','BW','NA','MW'];
     if (africanCountries.includes(data.country_code)) {
       const lifetimeGumroad = 'https://thriveenglish.gumroad.com/l/ilcnt?wanted=true&offer_code=FOUNDING';
